@@ -1,0 +1,889 @@
+:root {
+  --primary-color: #f0f2f5; /* Changed from dark blue to light grey */
+  --primary-dark-color: #1a1e2c; /* Added original dark color for elements that should remain dark */
+  --secondary-color: #f8c12c;
+  --accent-color: #e74c3c;
+  --light-color: #f4f4f4;
+  --dark-color: #333;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--primary-color);
+  color: var(--dark-color); /* Changed text color to dark for better contrast */
+}
+
+/* Header Styles */
+.navbar {
+  background-color: var(--primary-dark-color); /* Keep navbar dark for contrast */
+  border-bottom: 2px solid var(--secondary-color);
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow to navbar */
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--secondary-color) !important;
+}
+
+.nav-link {
+  color: var(--light-color) !important;
+  font-weight: 500;
+  margin: 0 0.5rem;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--secondary-color) !important;
+}
+
+/* Top Casinos Section Styles */
+.top-casinos-section {
+  margin: 1rem 0; /* Reduced top margin from 2rem to 1rem */
+  position: relative;
+  background-color: var(--primary-color); /* Dark blue background */
+  padding: 1rem 0 2rem 0; /* Reduced top padding from 2rem to 1rem */
+  /* Removed border-top as requested */
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.section-title, 
+.casino-list-section h2 {
+  color: var(--primary-dark-color); /* Changed to dark color for better contrast on light background */
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 0; /* Added to ensure no extra space at the top */
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Add subtle text shadow */
+}
+
+/* Podium layout styles */
+.podium-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 15px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 15px;
+}
+
+.podium-position {
+  transition: all 0.3s ease;
+  flex: 1;
+  width: 33.333%;
+  max-width: 350px;
+}
+
+.podium-position.first {
+  order: 2;
+  z-index: 3;
+  max-width: 380px;
+}
+
+.podium-position.second {
+  order: 1;
+  z-index: 2;
+}
+
+.podium-position.third {
+  order: 3;
+  z-index: 1;
+}
+
+.top-casino-card {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Enhanced shadow for better visibility */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Add subtle border */
+}
+
+.podium-position.first .top-casino-card {
+  margin-top: 30px; /* Changed from -30px to 30px to push the banner down */
+}
+
+.casino-logo-section {
+  background-color: #1a1e2c; /* Dark blue background */
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.casino-logo {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  max-width: 200px;
+}
+
+.podium-position.first .casino-logo-section {
+  height: 180px;
+}
+
+.podium-position.second .casino-logo-section,
+.podium-position.third .casino-logo-section {
+  height: 150px;
+}
+
+@media (max-width: 992px) {
+  .podium-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .podium-position {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 20px;
+  }
+  
+  .podium-position.first {
+    order: 1;
+    margin-top: 0;
+  }
+  
+  .podium-position.second {
+    order: 2;
+  }
+  
+  .podium-position.third {
+    order: 3;
+  }
+}
+
+.top-casino-card:hover {
+  transform: translateY(-5px);
+}
+
+.top-casino-card.placeholder {
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+}
+
+.position-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #1a1e2c;
+  color: white;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.info-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  font-size: 1.2rem;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.voted-badge {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1a1e2c;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 100;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Fix for casino-details-section to be below the voted badge */
+.casino-details-section {
+  position: relative;
+  z-index: 10;
+}
+
+.casino-details-section {
+  background-color: white;
+  color: #333;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.welcome-bonus {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.bonus-amount {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.casino-metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.metric {
+  text-align: center;
+  flex: 1;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+.metric-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Override for home page banners to ensure they remain centered and have the correct color */
+.top-casino-card .metric {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-casino-card .metric-value {
+  color: #333;
+  text-align: center;
+  width: 100%;
+}
+
+.top-casino-card .casino-metrics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-play-now {
+  background-color: #00c851; /* Green button */
+  color: white;
+  font-weight: 700;
+  padding: 10px 0;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.btn-play-now:hover {
+  background-color: #00a844;
+  transform: scale(1.02);
+}
+
+.payment-methods {
+  margin-top: auto;
+}
+
+.payment-label {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.payment-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.payment-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .top-casino-card {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .casino-metrics {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .casino-logo-section {
+    padding: 1.5rem;
+  }
+  
+  .casino-details-section {
+    padding: 1rem;
+  }
+}
+
+/* Casino Card Styles */
+.casino-card {
+  background-color: white; /* Changed to white background */
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: transform 0.3s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Enhanced shadow for better visibility */
+  padding: 0.75rem;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Add subtle border */
+}
+
+.button-column {
+  padding-right: 0 !important;
+}
+
+.button-column .btn-claim {
+  border-radius: 5px;
+  width: 100%;
+}
+
+.casino-card:hover {
+  transform: translateY(-5px);
+}
+
+/* This is for the casino cards in the list, not the banner */
+.casino-card .casino-logo-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+  background-color: transparent;
+}
+
+.casino-card .casino-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.casino-name {
+  font-weight: 700;
+  color: #000 !important; /* Changed to pure black with !important to override any other styles */
+  margin-bottom: 3px;
+}
+
+.vertical-divider {
+  width: 1px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.1); /* Changed to dark color with opacity for better contrast */
+  margin: 0 8px;
+}
+
+.casino-rating {
+  color: var(--secondary-color); /* Keep yellow color for rating */
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.casino-rating i {
+  margin-right: 2px;
+}
+
+.casino-bonus {
+  font-weight: 700;
+  color: var(--secondary-color); /* Keep yellow color for bonus */
+}
+
+.casino-spins {
+  color: #000 !important; /* Changed to pure black with !important to override any other styles */
+  font-size: 0.9rem;
+}
+
+.casino-features {
+  color: #000 !important; /* Changed to pure black with !important to override any other styles */
+  font-size: 0.9rem;
+}
+
+.casino-feature {
+  margin-bottom: 3px;
+}
+
+.casino-feature i {
+  color: var(--success-color);
+  margin-right: 5px;
+}
+
+.btn-claim {
+  background-color: var(--secondary-color);
+  color: var(--dark-color);
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.btn-claim:hover {
+  background-color: #e0a800;
+  transform: scale(1.05);
+}
+
+/* Admin Styles */
+.admin-container {
+  background-color: #fff;
+  color: #333;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.admin-title {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 0.5rem;
+}
+
+.admin-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-form label {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.admin-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.admin-btn:hover {
+  background-color: var(--secondary-color);
+  color: var(--dark-color);
+}
+
+.admin-btn-danger {
+  background-color: var(--danger-color);
+}
+
+.admin-btn-danger:hover {
+  background-color: #c82333;
+  color: #fff;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #151821;
+  color: var(--light-color);
+  padding: 2rem 0;
+  margin-top: 3rem;
+  border-top: 2px solid var(--secondary-color);
+}
+
+.footer-title {
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.footer-links li {
+  margin-bottom: 0.2rem;
+}
+
+.footer-link {
+  color: var(--light-color);
+  text-decoration: none;
+  transition: color 0.3s;
+  display: inline-block;
+}
+
+/* Footer title and content alignment */
+.footer-title {
+  text-align: center;
+}
+
+.footer-title-left {
+  text-align: center;
+}
+
+.footer-description {
+  line-height: 1.6;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer-title-left {
+    text-align: left;
+  }
+  
+  .footer-title:last-of-type {
+    text-align: right;
+  }
+  
+  .footer-description {
+    text-align: left;
+  }
+}
+
+.footer-link:hover {
+  color: var(--secondary-color);
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  padding-top: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Drag and Drop Styles */
+.reorder-list {
+  padding: 10px 0;
+}
+
+.reorder-item {
+  transition: background-color 0.2s ease;
+  cursor: grab;
+}
+
+.reorder-item:hover {
+  background-color: #f0f0f0 !important;
+}
+
+.reorder-item.dragging {
+  opacity: 0.5;
+  background-color: #e9ecef !important;
+  cursor: grabbing;
+}
+
+/* Admin Nav Tabs Styles */
+.nav-tabs .nav-link {
+  color: #333 !important;
+  font-weight: 600;
+  background-color: #f8f9fa;
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--secondary-color) !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--secondary-color) !important;
+  font-weight: 700;
+  background-color: #fff;
+  border-bottom-color: #fff;
+}
+
+.nav-link-custom {
+  color: #333 !important;
+}
+
+/* Giveaway Page Styles */
+.giveaway-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 2rem;
+  background-color: white;
+  color: #333;
+  border-radius: 10px;
+}
+
+.giveaway-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.giveaway-image-container {
+  position: relative;
+  min-height: 300px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Make casino-logo-section in giveaway page match the home page */
+.giveaway-image-container .casino-logo-section {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+/* Ensure the logo in giveaway page doesn't stretch */
+.giveaway-image-container .casino-logo {
+  width: auto;
+  height: auto;
+  max-width: 40%;
+  max-height: 40%;
+  object-fit: contain;
+  position: absolute;
+  top: 45%;  /* Adjusted from 50% to 45% to account for the date badge */
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.giveaway-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.giveaway-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.casino-logo-large {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  max-width: 70%;
+  max-height: 70%;
+}
+
+.placeholder-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  max-width: 80%;
+}
+
+.giveaway-date-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #333;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+  border-top: 2px solid rgba(248, 193, 44, 0.5);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .giveaway-date-badge {
+    font-size: 1rem;
+  }
+}
+
+.date-range {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.days-remaining {
+  color: #00c851;
+  font-weight: 700;
+}
+
+.giveaway-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.2rem;
+}
+
+.casino-name {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.prize-pool-badge {
+  font-size: 1.1rem;
+  padding: 8px 15px;
+  font-weight: 700;
+  background-color: #00c851;
+  color: white;
+  border-radius: 5px;
+}
+
+.giveaway-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+.giveaway-details {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.detail-section {
+  margin-bottom: 1.5rem;
+}
+
+.detail-title {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.prize-distribution {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.prize-line {
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.prize-line:last-child {
+  border-bottom: none;
+}
+
+.btn-claim-large {
+  background-color: #00c851;
+  color: white;
+  font-weight: 700;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.btn-claim-large:hover {
+  background-color: #00a844;
+  transform: scale(1.02);
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .banner-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .banner-logo {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .banner-nav {
+    display: none;
+  }
+  
+  .giveaway-card .row {
+    flex-direction: column;
+  }
+  
+  .giveaway-image-container {
+    min-height: 200px;
+  }
+  
+  .giveaway-title {
+    font-size: 1.5rem;
+  }
+  
+  .prize-pool-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.9rem;
+  }
+  
+  /* Footer responsive styles */
+  .footer-links {
+    text-align: center;
+  }
+  
+  .footer-title:not([style]) {
+    text-align: center;
+  }
+  
+  .footer-description:not([style]) {
+    text-align: center;
+  }
+  
+  .footer-description br {
+    display: none;
+  }
+}
