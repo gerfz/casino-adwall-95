@@ -75,6 +75,9 @@ exports.createCasino = async (req, res) => {
     const casino = await Casino.create({
       name,
       logo: `/uploads/${req.file.filename}`,
+      logoZoom: req.body.logoZoom || 1,
+      logoPositionX: req.body.logoPositionX || 50,
+      logoPositionY: req.body.logoPositionY || 50,
       rating: rating || 0,
       depositBonus,
       freeSpins: freeSpins || 0,
@@ -124,6 +127,9 @@ exports.updateCasino = async (req, res) => {
     casino.features = features ? JSON.parse(features) : casino.features;
     casino.categories = categories ? JSON.parse(categories) : casino.categories;
     casino.isActive = isActive !== undefined ? isActive : casino.isActive;
+    casino.logoZoom = req.body.logoZoom !== undefined ? parseFloat(req.body.logoZoom) : casino.logoZoom;
+    casino.logoPositionX = req.body.logoPositionX !== undefined ? parseInt(req.body.logoPositionX) : casino.logoPositionX;
+    casino.logoPositionY = req.body.logoPositionY !== undefined ? parseInt(req.body.logoPositionY) : casino.logoPositionY;
 
     // Update logo if new file was uploaded
     if (req.file) {

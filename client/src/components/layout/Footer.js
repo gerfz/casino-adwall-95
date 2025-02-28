@@ -8,11 +8,12 @@ const Footer = () => {
       <Container>
         <Row>
           <Col md={6}>
-            <h3 className="footer-title" style={{ textAlign: 'left' }}>Casino Adwall</h3>
+            <h3 className="footer-title" style={{ textAlign: 'left' }}>About Me</h3>
             <p className="footer-description" style={{ textAlign: 'left' }}>
-              Your ultimate guide to the best online casinos,<br />
-              bonuses, and promotions.<br />
-              Find the perfect casino for your gaming needs.
+              With thousands of subscribers, Ysivitonen has become<br />
+              a well-known figure in the online casino community.<br />
+              He streams his gameplay from different online casinos,<br />
+              giving his viewers a chance to see how he plays and what strategies he uses.
             </p>
           </Col>
           <Col md={6}>

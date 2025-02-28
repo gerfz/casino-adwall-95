@@ -41,7 +41,7 @@ const CasinoList = () => {
       
       let url = '/api/casinos';
       if (category && category !== 'All') {
-        url += `?category=${category}`;
+        url += `?category=${encodeURIComponent(category)}`;
       }
       
       const { data } = await axios.get(url, config);
@@ -162,7 +162,10 @@ const CasinoList = () => {
       
       await axios.put(
         '/api/casinos/reorder',
-        { category: activeCategory, casinoIds },
+        { 
+          category: activeCategory, 
+          casinoIds 
+        },
         config
       );
       

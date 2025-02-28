@@ -10,6 +10,24 @@ const CasinoSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  logoZoom: {
+    type: Number,
+    default: 1,
+    min: 0.1,
+    max: 3
+  },
+  logoPositionX: {
+    type: Number,
+    default: 50,
+    min: 0,
+    max: 100
+  },
+  logoPositionY: {
+    type: Number,
+    default: 50,
+    min: 0,
+    max: 100
+  },
   rating: {
     type: Number,
     min: 0,

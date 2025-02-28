@@ -11,6 +11,9 @@ const CasinoEdit = () => {
   const [logo, setLogo] = useState('');
   const [logoPreview, setLogoPreview] = useState('');
   const [logoFile, setLogoFile] = useState(null);
+  const [logoZoom, setLogoZoom] = useState(1);
+  const [logoPositionX, setLogoPositionX] = useState(50); // Center (0-100%)
+  const [logoPositionY, setLogoPositionY] = useState(50); // Center (0-100%)
   const [rating, setRating] = useState(0);
   const [depositBonus, setDepositBonus] = useState('');
   const [freeSpins, setFreeSpins] = useState(0);
@@ -66,6 +69,10 @@ const CasinoEdit = () => {
           setFeatures(data.features.length > 0 ? data.features : ['']);
           setCategories(data.categories);
           setIsActive(data.isActive);
+          // Set logo zoom and position if available, otherwise default values
+          setLogoZoom(data.logoZoom || 1);
+          setLogoPositionX(data.logoPositionX !== undefined ? data.logoPositionX : 50);
+          setLogoPositionY(data.logoPositionY !== undefined ? data.logoPositionY : 50);
           
           setLoading(false);
         } catch (err) {
@@ -85,6 +92,10 @@ const CasinoEdit = () => {
     if (file) {
       setLogoFile(file);
       setLogoPreview(URL.createObjectURL(file));
+      // Reset zoom and position to default when new logo is uploaded
+      setLogoZoom(1);
+      setLogoPositionX(50);
+      setLogoPositionY(50);
     }
   };
   
@@ -128,6 +139,13 @@ const CasinoEdit = () => {
     setIsActive(true);
   };
   
+  // Reset logo position and zoom
+  const resetLogoSettings = () => {
+    setLogoZoom(1);
+    setLogoPositionX(50);
+    setLogoPositionY(50);
+  };
+  
   // Submit handler
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -149,6 +167,9 @@ const CasinoEdit = () => {
       formData.append('features', JSON.stringify(features.filter(f => f.trim() !== '')));
       formData.append('categories', JSON.stringify(categories));
       formData.append('isActive', isActive);
+      formData.append('logoZoom', logoZoom);
+      formData.append('logoPositionX', logoPositionX);
+      formData.append('logoPositionY', logoPositionY);
       
       if (logoFile) {
         formData.append('logo', logoFile);
@@ -234,16 +255,121 @@ const CasinoEdit = () => {
                   </div>
                 </Form.Group>
                 
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-4">
                   <Form.Label>Logo</Form.Label>
                   {logoPreview && (
-                    <div className="mb-2">
-                      <Image
-                        src={logoPreview}
-                        alt="Casino Logo Preview"
-                        style={{ width: '100px', height: '100px', objectFit: 'contain' }}
-                        thumbnail
-                      />
+                    <div className="mb-3">
+                      <Row>
+                        <Col md={6}>
+                          <div className="mb-2">
+                            <strong>Standard Preview:</strong>
+                          </div>
+                          <Image
+                            src={logoPreview}
+                            alt="Casino Logo Preview"
+                            style={{ width: '100px', height: '100px', objectFit: 'contain' }}
+                            thumbnail
+                          />
+                        </Col>
+                        <Col md={6}>
+                          <div className="mb-2">
+                            <strong>Casino Card Preview:</strong>
+                          </div>
+                          <div 
+                            className="casino-logo-container-preview"
+                            style={{
+                              width: '70px',
+                              height: '70px',
+                              borderRadius: '50%',
+                              overflow: 'hidden',
+                              display: 'inline-block',
+                              backgroundColor: 'transparent',
+                              border: '1px solid #ddd',
+                              position: 'relative'
+                            }}
+                          >
+                            <div style={{ 
+                              width: '100%', 
+                              height: '100%', 
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              overflow: 'hidden',
+                              position: 'relative'
+                            }}>
+                              <img
+                                src={logoPreview}
+                                alt="Casino Logo Card Preview"
+                                style={{ 
+                                  position: 'absolute',
+                                  width: `${logoZoom * 100}%`,
+                                  height: 'auto',
+                                  objectFit: 'contain',
+                                  left: `${logoPositionX}%`,
+                                  top: `${logoPositionY}%`,
+                                  transform: 'translate(-50%, -50%)'
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </Col>
+                      </Row>
+                      
+                      <div className="mt-4">
+                        <div className="d-flex justify-content-between align-items-center mb-2">
+                          <strong>Logo Adjustments:</strong>
+                          <Button 
+                            variant="outline-secondary" 
+                            size="sm" 
+                            onClick={resetLogoSettings}
+                          >
+                            Reset to Default
+                          </Button>
+                        </div>
+                        
+                        <Form.Label>Zoom Level: {logoZoom.toFixed(1)}x</Form.Label>
+                        <Form.Range
+                          min={0.1}
+                          max={3}
+                          step={0.1}
+                          value={logoZoom}
+                          onChange={(e) => setLogoZoom(parseFloat(e.target.value))}
+                        />
+                        <div className="d-flex justify-content-between">
+                          <small>Zoom Out</small>
+                          <small>Zoom In</small>
+                        </div>
+                        
+                        <Form.Label className="mt-3">Horizontal Position: {logoPositionX}%</Form.Label>
+                        <Form.Range
+                          min={0}
+                          max={100}
+                          step={1}
+                          value={logoPositionX}
+                          onChange={(e) => setLogoPositionX(parseInt(e.target.value))}
+                        />
+                        <div className="d-flex justify-content-between">
+                          <small>Left</small>
+                          <small>Right</small>
+                        </div>
+                        
+                        <Form.Label className="mt-3">Vertical Position: {logoPositionY}%</Form.Label>
+                        <Form.Range
+                          min={0}
+                          max={100}
+                          step={1}
+                          value={logoPositionY}
+                          onChange={(e) => setLogoPositionY(parseInt(e.target.value))}
+                        />
+                        <div className="d-flex justify-content-between">
+                          <small>Top</small>
+                          <small>Bottom</small>
+                        </div>
+                        
+                        <Form.Text className="text-muted d-block mt-2">
+                          Adjust zoom and position to control how the logo appears in the casino card
+                        </Form.Text>
+                      </div>
                     </div>
                   )}
                   <Form.Control

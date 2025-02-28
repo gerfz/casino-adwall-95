@@ -32,11 +32,20 @@ const CasinoCard = ({ casino }) => {
       <Row className="align-items-center justify-content-between g-0">
         {/* Logo Column */}
         <Col xs={12} md={1} className="text-center text-md-start mb-2 mb-md-0">
-          <div className="casino-logo-container">
+          <div className="casino-logo-container" style={{ position: 'relative', overflow: 'hidden' }}>
             <img 
               src={casino.logo} 
               alt={casino.name} 
               className="casino-logo" 
+              style={{ 
+                position: 'absolute',
+                width: `${casino.logoZoom ? casino.logoZoom * 100 : 100}%`,
+                height: 'auto',
+                objectFit: 'contain',
+                left: `${casino.logoPositionX || 50}%`,
+                top: `${casino.logoPositionY || 50}%`,
+                transform: 'translate(-50%, -50%)'
+              }}
             />
           </div>
           <h5 className="casino-name mt-2 d-md-none">{casino.name}</h5>

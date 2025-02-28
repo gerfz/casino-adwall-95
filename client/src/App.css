@@ -472,8 +472,19 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Admin table styles */
+.admin-table {
+  background-color: #fff;
+  color: #333;
+}
+
+.admin-table thead {
+  background-color: var(--primary-dark-color);
+  color: #fff;
+}
+
 .admin-title {
-  color: var(--primary-color);
+  color: var(--primary-dark-color);
   margin-bottom: 1.5rem;
   border-bottom: 2px solid var(--secondary-color);
   padding-bottom: 0.5rem;
@@ -489,11 +500,11 @@ body {
 
 .admin-form label {
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--primary-dark-color);
 }
 
 .admin-btn {
-  background-color: var(--primary-color);
+  background-color: var(--primary-dark-color);
   color: #fff;
   border: none;
   padding: 0.5rem 1.5rem;
